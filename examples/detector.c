@@ -577,7 +577,7 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
         if(filename){
             strncpy(input, filename, 256);
         } else {
-            printf("Enter Image Path: ");
+            printf("Enter Image Path:\n");
             fflush(stdout);
             input = fgets(input, 256, stdin);
             if(!input) return;
@@ -595,7 +595,7 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
         float *X = sized.data;
         time=what_time_is_it_now();
         network_predict(net, X);
-        printf("%s: Predicted in %f seconds.\n", input, what_time_is_it_now()-time);
+        // printf("%s: Predicted in %f seconds.\n", input, what_time_is_it_now()-time);
         int nboxes = 0;
         detection *dets = get_network_boxes(net, im.w, im.h, thresh, hier_thresh, 0, 1, &nboxes);
         //printf("%d\n", nboxes);
@@ -613,7 +613,9 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
             if(fullscreen){
                 cvSetWindowProperty("predictions", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);
             }
-            show_image(im, "predictions", 0);
+            show_image(im, "predictions");
+            cvWaitKey(0);
+            cvDestroyAllWindows();
 #endif
         }
 

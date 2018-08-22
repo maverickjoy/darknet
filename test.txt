@@ -1,0 +1,3 @@
+data/dataset/cumulative/a86.png
+data/dataset/cumulative/a359.png
+data/dataset/cumulative/a384.png
